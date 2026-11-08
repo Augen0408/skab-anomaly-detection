@@ -1,0 +1,87 @@
+{
+  "model": "CNNAutoencoder",
+  "input_features": 8,
+  "trainable_params": 17064,
+  "layers": [
+    {
+      "name": "encoder.0.weight",
+      "shape": [
+        32,
+        8,
+        3
+      ],
+      "numel": 768
+    },
+    {
+      "name": "encoder.0.bias",
+      "shape": [
+        32
+      ],
+      "numel": 32
+    },
+    {
+      "name": "encoder.2.weight",
+      "shape": [
+        64,
+        32,
+        3
+      ],
+      "numel": 6144
+    },
+    {
+      "name": "encoder.2.bias",
+      "shape": [
+        64
+      ],
+      "numel": 64
+    },
+    {
+      "name": "encoder.4.weight",
+      "shape": [
+        32,
+        64,
+        3
+      ],
+      "numel": 6144
+    },
+    {
+      "name": "encoder.4.bias",
+      "shape": [
+        32
+      ],
+      "numel": 32
+    },
+    {
+      "name": "decoder.0.weight",
+      "shape": [
+        32,
+        32,
+        3
+      ],
+      "numel": 3072
+    },
+    {
+      "name": "decoder.0.bias",
+      "shape": [
+        32
+      ],
+      "numel": 32
+    },
+    {
+      "name": "decoder.2.weight",
+      "shape": [
+        8,
+        32,
+        3
+      ],
+      "numel": 768
+    },
+    {
+      "name": "decoder.2.bias",
+      "shape": [
+        8
+      ],
+      "numel": 8
+    }
+  ]
+}

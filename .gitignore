@@ -179,3 +179,23 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# ---- SKAB 项目补充规则（与 GitHub 模板合并，原规则保留）----
+# 环境与依赖
+.venv/
+venv/
+# 原始数据与处理结果
+data/
+# 模型权重
+checkpoints/
+*.pth
+# 中间产物（可由代码重生成）
+results/residuals/
+results/**/test_predictions.csv
+results/_smoke/
+# 报告与预览（本仓库不发布报告，避免个人信息）
+report/
+# 本地临时文件
+*.log
+.DS_Store
+Thumbs.db

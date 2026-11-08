@@ -1,0 +1,33 @@
+{
+  "tp": 9465,
+  "fp": 3886,
+  "fn": 3247,
+  "tn": 5197,
+  "precision": 0.7089356602501685,
+  "recall": 0.744572057898049,
+  "f1": 0.7263170011126886,
+  "far": 0.4278322140262028,
+  "mar": 0.2554279421019509,
+  "macro_f1": 0.6782240641966295,
+  "macro_far": 0.41613888912403973,
+  "macro_recall": 0.7173270852947741,
+  "n_files": 34,
+  "config": {
+    "out": "results/protocol_v2_official",
+    "preset": "official",
+    "window": 60,
+    "stride": 1,
+    "epochs": 100,
+    "batch_size": 32,
+    "lr": 0.001,
+    "quantile": 0.999,
+    "consecutive": 60,
+    "residual": "mae_sum",
+    "val_split": 0.1,
+    "patience": 5,
+    "seed": 42,
+    "train_size": 400,
+    "only": null
+  },
+  "elapsed_sec": 58.7
+}

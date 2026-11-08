@@ -1,0 +1,44 @@
+{
+  "n_files": 34,
+  "fold_size": 17,
+  "grid_size": 48,
+  "overall": {
+    "precision": 0.7168,
+    "recall": 0.8824,
+    "f1": 0.791,
+    "far": 0.4411,
+    "mar": 0.1176
+  },
+  "folds": [
+    {
+      "fold": 1,
+      "n_selection": 17,
+      "n_eval": 17,
+      "window": 30,
+      "residual": "residual_mse",
+      "quantile": 0.999,
+      "consecutive": 5,
+      "select_macro_f1": 0.8233,
+      "eval_precision": 0.6928,
+      "eval_recall": 0.8605,
+      "eval_f1": 0.7676,
+      "eval_far": 0.4538,
+      "eval_mar": 0.1395
+    },
+    {
+      "fold": 2,
+      "n_selection": 17,
+      "n_eval": 17,
+      "window": 30,
+      "residual": "residual_mse",
+      "quantile": 0.99,
+      "consecutive": 1,
+      "select_macro_f1": 0.7057,
+      "eval_precision": 0.7388,
+      "eval_recall": 0.9021,
+      "eval_f1": 0.8123,
+      "eval_far": 0.4281,
+      "eval_mar": 0.0979
+    }
+  ]
+}

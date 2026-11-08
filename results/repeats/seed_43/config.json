@@ -1,0 +1,36 @@
+{
+  "seed": 43,
+  "split_seed": 42,
+  "model": "CNNAutoencoder",
+  "window": 30,
+  "stride": 1,
+  "batch_size": 32,
+  "epochs": 60,
+  "patience": 5,
+  "lr": 0.001,
+  "val_split": 0.1,
+  "scaler": "per-file StandardScaler",
+  "residual": "mse",
+  "quantile": 0.99,
+  "threshold_scale": 1.3333333333333333,
+  "consecutive": 1,
+  "train_size": 400,
+  "n_files": 34,
+  "pooled": {
+    "precision": 0.715794189171893,
+    "recall": 0.8778056819965468,
+    "f1": 0.7885645798082346,
+    "far": 0.4408815645785764,
+    "mar": 0.12219431800345315,
+    "tp": 11185,
+    "fp": 4441,
+    "fn": 1557,
+    "tn": 5632
+  },
+  "macro": {
+    "macro_f1": 0.7630129380849567,
+    "macro_far": 0.4381817262295351,
+    "macro_recall": 0.8506561372290288
+  },
+  "elapsed_sec": 36.3
+}

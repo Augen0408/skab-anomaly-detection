@@ -1,0 +1,3 @@
+﻿fold,n_selection,n_eval,window,residual,quantile,consecutive,select_macro_f1,eval_precision,eval_recall,eval_f1,eval_far,eval_mar
+1,17,17,30,residual_mse,0.999,5,0.8233,0.6928,0.8605,0.7676,0.4538,0.1395
+2,17,17,30,residual_mse,0.99,1,0.7057,0.7388,0.9021,0.8123,0.4281,0.0979

@@ -1,0 +1,12 @@
+{
+  "fp": 4847,
+  "tn": 5226,
+  "far": 0.4812,
+  "normal_windows": 10073,
+  "segments": 257,
+  "mean_len": 18.9,
+  "median_len": 2.0,
+  "max_len": 174,
+  "top10_share": 0.355,
+  "windows": 22815
+}
