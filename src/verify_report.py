@@ -130,7 +130,9 @@ def main() -> int:
 
     delay = n["delay"]
     v2d = delay[delay["config"].astype(str).str.startswith("v2")]
-    med = int(v2d["delay_samples"].median())
+    med = float(v2d["delay_samples"].median())
+    offd = delay[delay["config"].astype(str).str.startswith("official")]
+    off_med = float(offd["delay_samples"].median())
     hits = int(v2d["detected"].sum())
 
     st = n["rep_stat"]
@@ -140,7 +142,9 @@ def main() -> int:
         "PCA F1": f4(n["base"].set_index("model").loc["PCA", "f1"]),
         "PCA-T² 行": "PCA-T²",
         "检测延迟命中数": f"{hits}/{len(v2d)}",
-        "检测延迟中位数": f"中位延迟 {med} 点",
+        "检测延迟中位数": f"中位延迟 {med:.1f} 点",
+        "检测延迟中位数(官方)": f"中位延迟 {off_med:.1f} 点",
+        "FAR 区间": f"FAR 从 {n['sweep_far_min']:.3f} 变到 {n['sweep_far_max']:.3f}",
         "多种子现状": "本节 48 组扫描、官方配置与基线尚未系统重复",
         "受控分解小节": "有序分步对照",
         "事后探索声明": "属事后探索",

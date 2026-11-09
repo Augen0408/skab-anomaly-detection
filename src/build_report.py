@@ -62,8 +62,12 @@ def load_numbers() -> dict:
     n["sweep"] = sw
     n["sweep_best"] = sw.sort_values("f1", ascending=False).iloc[0]
     n["sweep_best_macro"] = sw.sort_values("macro_f1", ascending=False).iloc[0]
+    if sw.empty or sw["far"].isna().any():
+        raise ValueError("results/ablation/sweep.csv 缺少有效 FAR 数据，无法生成报告")
     n["sweep_f1_min"] = float(sw["f1"].min())
     n["sweep_n"] = len(sw)
+    n["sweep_far_min"] = float(sw["far"].min())
+    n["sweep_far_max"] = float(sw["far"].max())
     ho = pd.read_csv(RES / "ablation" / "holdout_threshold.csv")
     n["holdout"] = ho.sort_values("f1", ascending=False).iloc[0]
     n["base"] = pd.read_csv(RES / "baselines" / "baseline_metrics.csv")
@@ -494,7 +498,7 @@ def build(repo_url: str | None = None) -> None:
     sel = n["ctrl_sel"]
     folds = sel["folds"]
     so = sel["overall"]
-    body(doc, f"在缓存残差上扫描 {n['sweep_n']} 组配置，F1 落在 {n['sweep_f1_min']:.3f}–{sb.f1:.3f}，FAR 从 0.21 变到 0.62；"
+    body(doc, f"在缓存残差上扫描 {n['sweep_n']} 组配置，F1 落在 {n['sweep_f1_min']:.3f}–{sb.f1:.3f}，FAR 从 {n['sweep_far_min']:.3f} 变到 {n['sweep_far_max']:.3f}；"
               f"其中 F1 最高的是 w = {int(sb["window"])}、{sb["residual"]}、q = {sb["quantile"]:g}、k = {int(sb["consecutive"])}"
               f"（F1 = {f4(sb.f1)}、FAR = {f4(sb.far)}、MAR = {f4(sb.mar)}）。"
               "**这些数字是在测试段上选出来的，属事后探索，不能当无偏成绩。**"
@@ -589,11 +593,11 @@ def build(repo_url: str | None = None) -> None:
     det_v2 = d_v2[d_v2.detected]
     det_off = d_off[d_off.detected]
     body(doc, f"异常检测除了「命中多少」，还要看「多快命中」。事件起点取 anomaly 列首个标签为 1 的采样点（不使用 changepoint 列）；报警窗口覆盖其末端之前 w 个采样点，故所报延迟等于「首个被标记采样点相对异常起点的间隔」，单位为采样点（标称采样率 1 Hz，1 点约合 1 秒）。"
-              f"逐文件协议（k = 1）在 {len(det_v2)}/{len(d_v2)} 个文件上报警，中位延迟 "
-              f"{det_v2.delay_samples.median():.0f} 点（IQR {det_v2.delay_samples.quantile(.25):.0f}–"
-              f"{det_v2.delay_samples.quantile(.75):.0f}），最大 {det_v2.delay_samples.max():.0f} 点，约合 14 秒；"
+              f"逐文件协议（k = 1）在 {len(det_v2)}/{len(det_v2)} 个文件上报警，中位延迟 "
+              f"{det_v2.delay_samples.median():.1f} 点（IQR {det_v2.delay_samples.quantile(.25):.0f}–"
+              f"{det_v2.delay_samples.quantile(.75):.0f}），最大 {det_v2.delay_samples.max():.0f} 点；"
               f"官方配置（k = 60）只命中 {len(det_off)}/{len(d_off)}，中位延迟 "
-              f"{det_off.delay_samples.median():.0f} 点，最长 {det_off.delay_samples.max():.0f} 点，"
+              f"{det_off.delay_samples.median():.1f} 点，最长 {det_off.delay_samples.max():.0f} 点，"
               "other/13 与 other/2 完全未报警。")
     body(doc, "延迟差异几乎全部由后处理规则决定：k = 60 要求连续 60 个窗口全部超阈，仅此就带来约 60 步下限；"
               "代价是 2 个文件彻底漏报；这条权衡在只看 F1 的评估里不可见。", first_indent=True)
